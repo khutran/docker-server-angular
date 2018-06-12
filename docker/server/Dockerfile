@@ -47,14 +47,15 @@ RUN yum -y install git && \
     yum -y install gcc-c++ make && \
     yum -y install libgcrypt-devel && \
     ln -s /usr/lib64/libcurl.so.4 /usr/lib64/libcurl-gnutls.so.4 && \
+    npm install -g @angular/cli && \
     yum clean all
  
 #config nginx
-#RUN rm -rf /etc/nginx/nginx.conf 
-#ADD nginx.conf /etc/nginx/
+RUN rm -rf /etc/nginx/nginx.conf 
+ADD nginx.conf /etc/nginx/
 #config apache 
-#RUN rm -rf /etc/httpd/conf/httpd.conf
-#ADD httpd.conf /etc/httpd/conf/
+RUN rm -rf /etc/httpd/conf/httpd.conf
+ADD httpd.conf /etc/httpd/conf/
 
 EXPOSE 80
 
