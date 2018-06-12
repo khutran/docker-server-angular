@@ -33,9 +33,9 @@ RUN yum -y --setopt=tsflags=nodocs update && \
     wget https://repo.codeit.guru/codeit.el`rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release)`.repo && \
     yum -y install httpd && \
     mkdir /etc/httpd/conf.d/web && \
-    #sed -i s/80/${port_apache}/g /etc/httpd/conf/httpd.conf && \
-    #sed -i 's/DirectoryIndex index.html/DirectoryIndex index.php index.html/g' /etc/httpd/conf/httpd.conf && \
-    #echo "IncludeOptional conf.d/web/*.conf" >> /etc/httpd/conf/httpd.conf
+    sed -i s/80/${port_apache}/g /etc/httpd/conf/httpd.conf && \
+    sed -i 's/DirectoryIndex index.html/DirectoryIndex index.php index.html/g' /etc/httpd/conf/httpd.conf && \
+    echo "IncludeOptional conf.d/web/*.conf" >> /etc/httpd/conf/httpd.conf
 
 
 #install nodejs
@@ -50,17 +50,15 @@ RUN yum -y install git && \
     yum clean all
  
 #config nginx
-RUN rm -rf /etc/nginx/nginx.conf 
-ADD nginx.conf /etc/nginx/
+#RUN rm -rf /etc/nginx/nginx.conf 
+#ADD nginx.conf /etc/nginx/
 #config apache 
-RUN rm -rf /etc/httpd/conf/httpd.conf
-ADD httpd.conf /etc/httpd/conf/
+#RUN rm -rf /etc/httpd/conf/httpd.conf
+#ADD httpd.conf /etc/httpd/conf/
 
 EXPOSE 80
 
 # Simple startup script to avoid some issues observed with container restart
-ADD run/mysql /usr/sbin/
-ADD run/mysqldump /usr/sbin/
 
 ADD run-httpd.sh /run-httpd.sh
 RUN chmod -v +x /run-httpd.sh
