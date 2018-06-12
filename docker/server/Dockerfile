@@ -47,9 +47,13 @@ RUN yum -y install git && \
     yum -y install gcc-c++ make && \
     yum -y install libgcrypt-devel && \
     ln -s /usr/lib64/libcurl.so.4 /usr/lib64/libcurl-gnutls.so.4 && \
-    npm install -g @angular/cli && \
     yum clean all
- 
+
+#install angularcli
+RUN npm install -g @angular/cli && \
+#install pm2
+RUN npm install pm2@latest -g
+
 #config nginx
 RUN rm -rf /etc/nginx/nginx.conf 
 ADD nginx.conf /etc/nginx/
