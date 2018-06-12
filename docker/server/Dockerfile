@@ -50,7 +50,7 @@ RUN yum -y install git && \
     yum clean all
 
 #install angularcli
-RUN npm install -g @angular/cli && \
+RUN npm install -g @angular/cli
 #install pm2
 RUN npm install pm2@latest -g
 
