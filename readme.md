@@ -29,3 +29,7 @@
 
 ### IP table:   
 
+mkdir -p var/web
+mkdir -p var/www/certbot
+mkdir -p etc/nginx/letsencrypt
+mkdir -p etc/httpd/conf.d/web
